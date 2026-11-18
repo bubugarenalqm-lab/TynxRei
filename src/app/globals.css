@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { --bg:#FCF8F6; --card:#FFFFFF; --fg:#3B3638; --muted:#8A7F83; --line:#EFE6E8; --brand:#E2819F; --brand-soft:#FDE7EE; }
+.dark { --bg:#1A1618; --card:#242022; --fg:#F2EBEE; --muted:#A99DA2; --line:#352F32; --brand-soft:#3A2630; }
+[data-accent="lavender"] { --brand:#9F86D4; --brand-soft:#EEE7FA; }
+.dark[data-accent="lavender"] { --brand-soft:#2E2740; }
+[data-accent="sage"] { --brand:#6FA98A; --brand-soft:#E3F0E9; }
+.dark[data-accent="sage"] { --brand-soft:#22342B; }
+[data-accent="sky"] { --brand:#5E9BD6; --brand-soft:#E2EEF9; }
+.dark[data-accent="sky"] { --brand-soft:#1F3042; }
+[data-accent="crimson"] { --brand:#D13F5E; --brand-soft:#FBE3E8; }
+.dark[data-accent="crimson"] { --brand-soft:#3D1F27; }
+html { font-size: 16px; } html[data-textsize="sm"] { font-size: 14.5px; } html[data-textsize="lg"] { font-size: 18px; }
+body { @apply bg-bg text-fg font-sans antialiased; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
