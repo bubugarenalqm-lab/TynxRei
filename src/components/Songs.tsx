@@ -4,12 +4,26 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 export type Song = { id: string; added_by: string; title: string; artist: string | null; url: string | null; note: string | null; created_at: string };
+function embedUrl(u: string | null): string | null {
+  if (!u) return null;
+  try {
+    const x = new URL(u), h = x.hostname.replace(/^www\./, ""), ok = (id?: string | null) => (id && /^[\w-]{6,40}$/.test(id) ? id : null);
+    if (h === "youtu.be") { const id = ok(x.pathname.slice(1)); return id ? `https://www.youtube-nocookie.com/embed/${id}` : null; }
+    if (h === "youtube.com" || h === "m.youtube.com" || h === "music.youtube.com") {
+      const id = ok(x.searchParams.get("v") ?? x.pathname.match(/^\/(?:shorts|embed)\/([\w-]+)/)?.[1]);
+      return id ? `https://www.youtube-nocookie.com/embed/${id}` : null;
+    }
+    if (h === "open.spotify.com") { const m = x.pathname.match(/^\/(?:intl-[a-z]+\/)?(track|album|playlist|episode)\/(\w{10,30})/); return m ? `https://open.spotify.com/embed/${m[1]}/${m[2]}` : null; }
+  } catch { /* url không hợp lệ */ }
+  return null;
+}
 const host = (u: string) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return u; } };
 
 export default function Songs({ meId, items, names }: { meId: string; items: Song[]; names: Record<string, string> }) {
   const router = useRouter();
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [playing, setPlaying] = useState<string | null>(null);
   const f = "mt-1 w-full rounded-xl border border-line bg-bg px-3 py-2";
 
   async function add(e: React.FormEvent<HTMLFormElement>) {
@@ -49,7 +63,8 @@ export default function Songs({ meId, items, names }: { meId: string; items: Son
             <h2 className="font-display text-2xl">{s.title}</h2>
             <p className="text-sm text-muted">{s.artist ?? "Không rõ nghệ sĩ"} · {names[s.added_by] ?? ""} thêm</p>
             {s.note && <p className="mt-2 whitespace-pre-wrap text-sm">{s.note}</p>}
-            <p className="mt-3 flex items-center gap-4 text-sm">{s.url && <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-brand underline">Nghe trên {host(s.url)}</a>}
+            {playing === s.id && embedUrl(s.url) && <iframe src={embedUrl(s.url)!} title={`Nghe ${s.title}`} loading="lazy" allow="encrypted-media; picture-in-picture" sandbox="allow-scripts allow-same-origin allow-presentation allow-popups" className="mt-3 h-40 w-full rounded-2xl border-0" />}
+            <p className="mt-3 flex flex-wrap items-center gap-4 text-sm">{embedUrl(s.url) && <button onClick={() => setPlaying(playing === s.id ? null : s.id)} className="rounded-full bg-brand px-3 py-1 text-white">{playing === s.id ? "Đóng trình phát" : "Phát tại đây"}</button>}{s.url && <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-brand underline">Nghe trên {host(s.url)}</a>}
               {s.added_by === meId && <button onClick={() => del(s)} aria-label={`Xóa ${s.title}`} className="text-xs text-muted hover:text-brand">Xóa</button>}</p>
           </li>))}</ul>)}
     </div>

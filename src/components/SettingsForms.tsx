@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { signOut } from "@/app/login/actions";
 
-const ACCENTS = [["rose", "Hồng", "#E2819F"], ["lavender", "Tím", "#9F86D4"], ["sage", "Xanh sage", "#6FA98A"], ["sky", "Xanh trời", "#5E9BD6"], ["crimson", "Đỏ thẫm", "#D13F5E"]] as const;
+const ACCENTS = [["rose", "Hồng", "#E2819F"], ["lavender", "Tím", "#9F86D4"], ["sage", "Xanh sage", "#6FA98A"], ["sky", "Xanh trời", "#5E9BD6"], ["crimson", "Đỏ thẫm", "#D13F5E"], ["midnight", "Xanh đêm", "#5B6BC0"], ["peach", "Đào", "#E58E62"]] as const;
 const set = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* bỏ qua */ } };
 
 export default function SettingsForms({ meId, name }: { meId: string; name: string }) {

@@ -11,6 +11,17 @@
 .dark[data-accent="sky"] { --brand-soft:#1F3042; }
 [data-accent="crimson"] { --brand:#D13F5E; --brand-soft:#FBE3E8; }
 .dark[data-accent="crimson"] { --brand-soft:#3D1F27; }
+[data-accent="midnight"] { --brand:#5B6BC0; --brand-soft:#E6E8F7; }
+.dark[data-accent="midnight"] { --brand-soft:#23263D; }
+[data-accent="peach"] { --brand:#E58E62; --brand-soft:#FDEBDD; }
+.dark[data-accent="peach"] { --brand-soft:#3B2A22; }
+.petal { border-radius: 60% 40% 60% 40%; opacity: .16; animation: drift 14s ease-in-out infinite; }
+@keyframes drift { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-26px) rotate(40deg); } }
+@media print {
+  html, body, .app-shell { height: auto !important; display: block !important; background: #fff !important; }
+  * { overflow: visible !important; }
+  .print-card { break-inside: avoid; }
+}
 html { font-size: 16px; } html[data-textsize="sm"] { font-size: 14.5px; } html[data-textsize="lg"] { font-size: 18px; }
 body { @apply bg-bg text-fg font-sans antialiased; }
 :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
