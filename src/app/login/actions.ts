@@ -8,7 +8,7 @@ const schema = z.object({
   password: z.string().min(6).max(72),
 });
 /** Supabase Auth cần email; tài khoản đăng nhập được ánh xạ sang email nội bộ, không gửi thư thật. */
-export const usernameToEmail = (u: string) => `${u}@tynxrei.example.com`;
+const usernameToEmail = (u: string) => `${u}@tynxrei.example.com`;
 
 export async function signIn(_: { error?: string } | undefined, form: FormData) {
   const parsed = schema.safeParse({ username: form.get("username"), password: form.get("password") });
