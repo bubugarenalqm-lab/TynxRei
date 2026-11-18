@@ -14,6 +14,8 @@ const NAV = [
   { href: "/bloom", label: "Hoa mỗi ngày" },
   { href: "/little-things", label: "Điều nhỏ bé" },
   { href: "/story", label: "Câu chuyện" },
+  { href: "/dreams", label: "Giấc mơ" },
+  { href: "/songs", label: "Bài hát" },
   { href: "/capsules", label: "Hộp thời gian" },
   { href: "/letters", label: "Thư" },
   { href: "/settings", label: "Cài đặt" },
