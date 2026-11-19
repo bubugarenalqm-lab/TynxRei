@@ -10,8 +10,8 @@ const MOODS: { key: Mood; label: string; cls: string }[] = [
 ];
 export type MoodRow = { user_id: string; mood: Mood; day: string };
 
-export default function LittleThings({ me, partner, today, startedOn, days, myStreak, bothStreak, moods }: {
-  me: Person; partner: Person | null; today: string; startedOn: string | null; days: number | null; myStreak: number; bothStreak: number; moods: MoodRow[];
+export default function LittleThings({ me, partner, today, startedOn, days, moods }: {
+  me: Person; partner: Person | null; today: string; startedOn: string | null; days: number | null; moods: MoodRow[];
 }) {
   const [rows, setRows] = useState(moods);
   const [start, setStart] = useState(startedOn ?? "");
@@ -52,10 +52,7 @@ export default function LittleThings({ me, partner, today, startedOn, days, mySt
       <h1 className="flex items-center gap-2 font-display text-4xl"><Icon name="heart" className="h-7 w-7 fill-current text-brand" />Điều nhỏ bé</h1>
       <p className="mt-1 text-sm text-muted">Những cử chỉ nhỏ giữ hai bạn gần nhau.</p>
       <div className="mt-6 grid max-w-3xl gap-4">
-        <div className="grid grid-cols-2 gap-4">
-          <Stat icon="flame" n={bothStreak} label="ngày liên tiếp" sub={`Cả hai cùng ghé · bạn ${myStreak} ngày`} />
-          <Stat icon="calendar" n={shownDays !== null && shownDays > 0 ? shownDays : 0} label="ngày bên nhau" sub="Cứ tiếp tục ghé thăm" />
-        </div>
+        <Stat icon="calendar" n={shownDays !== null && shownDays > 0 ? shownDays : 0} label="ngày bên nhau" sub="Cứ tiếp tục ghé thăm" />
         <section className={`${card} flex flex-wrap items-center justify-between gap-3`} aria-label="Ngày đầu tiên">
           <div className="flex items-center gap-3"><Icon name="calendar" className="h-6 w-6 text-brand" /><div><p className="font-medium">Ngày đầu tiên của hai bạn</p><p className="text-xs text-muted">Ngày câu chuyện bắt đầu</p></div></div>
           {editing ? (<div className="flex flex-wrap items-center gap-2"><input type="date" value={start} max={today} onChange={(e) => setStart(e.target.value)} aria-label="Ngày bắt đầu" className="rounded-xl border border-line bg-bg px-3 py-2 text-sm" />

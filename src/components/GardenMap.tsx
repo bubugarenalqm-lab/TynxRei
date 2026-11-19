@@ -8,9 +8,7 @@ const jitter = (i: number, range: number) => { const x = Math.sin(i * 127.1 + 31
 function Head({ kind }: { kind: TLKind }) {
   switch (kind) {
     case "beginning": return <path d="M0 8 C-14 -3 -9 -15 0 -8 C9 -15 14 -3 0 8z" fill="var(--brand)" />;
-    case "dream": return <path d="M0-11l3.2 6.6 7.3 1-5.3 5.1 1.3 7.2L0 5.4l-6.5 3.5 1.3-7.2-5.3-5.1 7.3-1z" fill="#E8B84E" stroke="#fff" strokeWidth=".8" />;
-    case "capsule": return <g fill="#6FA8DC"><path d="M-8-10h16L0 0z" /><path d="M0 0l8 10h-16z" opacity=".7" /></g>;
-    case "song": return <g stroke="var(--fg)" strokeWidth="1.6" fill="var(--fg)"><ellipse cx="-3" cy="6" rx="5" ry="3.6" stroke="none" /><path d="M2 6V-10l7 3" fill="none" /></g>;
+    case "sheet": return <g stroke="var(--fg)" strokeWidth="1.6" fill="var(--fg)"><ellipse cx="-3" cy="6" rx="5" ry="3.6" stroke="none" /><path d="M2 6V-10l7 3" fill="none" /></g>;
     case "letter": return <g><rect x="-10" y="-7" width="20" height="14" rx="2" fill="#fff" stroke="var(--brand)" strokeWidth="1.5" /><path d="M-10-6l10 8 10-8" fill="none" stroke="var(--brand)" strokeWidth="1.5" /></g>;
     default: {
       const c = kind === "bloom" ? "#A58BD6" : "var(--brand)";
