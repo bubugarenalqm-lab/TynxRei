@@ -21,6 +21,6 @@ export async function signIn(_: { error?: string } | undefined, form: FormData) 
 
 export async function signOut() {
   const supabase = await createClient();
-  await supabase.auth.signOut();
+  await supabase.auth.signOut({ scope: "local" }); // chỉ đăng xuất máy này, không đá các máy khác
   redirect("/login");
 }
